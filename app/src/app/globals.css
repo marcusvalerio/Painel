@@ -35,7 +35,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .auth-main { display: grid; place-items: center; padding: 32px 16px; }
 .auth-form { width: min(420px, 100%); display: grid; gap: 14px; }
 .logo { font-family: var(--font-gabarito), sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -.04em; display: flex; align-items: center; gap: 8px; text-decoration: none; }
-.logo i { width: 11px; height: 11px; background: currentColor; border-radius: 2px; display: inline-block; }
+.logo i { width: 11px; height: 11px; background: var(--butter); border-radius: 2px; display: inline-block; }
 .plans-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .plans-pick label { border: 1px solid var(--line); border-radius: 12px; padding: 10px; cursor: pointer; display: grid; gap: 2px; font-size: 13px; background: var(--surface); }
 .plans-pick label:has(input:checked) { border-color: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
