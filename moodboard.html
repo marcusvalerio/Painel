@@ -1,0 +1,269 @@
+<title>Painel MV Moodboard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: prancha de moodboard em blocos — direção, paleta, tipo, componentes, módulos novos, prévia */
+:root{
+  --brand:#ED4B00; --brand-2:#FF7A3D; --brand-soft:#FFE6D9;
+  --ink:#16141A; --graphite:#2A2730; --bg:#F6F4F2; --surface:#FFFFFF; --surface-2:#EFECE8;
+  --muted:#6F6A73; --line:rgba(22,20,26,.09);
+  --ok:#1F9D63; --warn:#E0A100; --bad:#E5383B; --info:#3B6FE0; --violet:#7A5AF0;
+  --ok-bg:#E3F5EC; --warn-bg:#FBF1D6; --bad-bg:#FCE4E4; --info-bg:#E4ECFC; --violet-bg:#EEE9FD;
+  --display:'Gabarito',system-ui,sans-serif; --body:'Geist',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace;
+  --r:16px; --r-sm:10px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --brand:#FF5A14; --brand-2:#FF8A52; --brand-soft:#3A1F12;
+  --ink:#F3F0EE; --graphite:#D9D4D0; --bg:#0E0D11; --surface:#17161B; --surface-2:#201E25; --muted:#9590A0; --line:rgba(255,255,255,.08);
+  --ok-bg:#12301F; --warn-bg:#33290D; --bad-bg:#371517; --info-bg:#152240; --violet-bg:#231B3D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --brand:#FF5A14; --brand-2:#FF8A52; --brand-soft:#3A1F12;
+  --ink:#F3F0EE; --graphite:#D9D4D0; --bg:#0E0D11; --surface:#17161B; --surface-2:#201E25; --muted:#9590A0; --line:rgba(255,255,255,.08);
+  --ok-bg:#12301F; --warn-bg:#33290D; --bad-bg:#371517; --info-bg:#152240; --violet-bg:#231B3D; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 80px;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(40px,7vw,84px);font-weight:800;line-height:.95}
+h1 em{font-style:normal;color:var(--brand)}
+h2{font-size:28px;font-weight:700}
+h3{font-size:18px;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:18px;color:var(--muted);max-width:62ch}
+.sec{display:grid;gap:20px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px}
+.grid{display:grid;gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;min-width:0}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;align-items:end}
+.keywords{display:flex;flex-wrap:wrap;gap:8px}
+.kw{font-family:var(--display);font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.kw.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* paleta */
+.pal{grid-template-columns:2fr 1fr 1fr 1fr 1fr}
+.sw{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column}
+.sw .chip{height:120px}
+.sw.big .chip{height:200px}
+.sw .meta{padding:12px 14px;display:grid;gap:2px}
+.sw .meta b{font-family:var(--display);font-weight:600}
+.sw .meta span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.sem{grid-template-columns:repeat(5,1fr)}
+.semc{border-radius:var(--r-sm);padding:12px 14px;display:grid;gap:2px;font-size:13px}
+.semc b{font-family:var(--display);font-weight:600;font-size:14px}
+.ramp{display:flex;border-radius:var(--r-sm);overflow:hidden;height:36px}
+.ramp div{flex:1}
+
+/* tipo */
+.type{grid-template-columns:1fr 1fr}
+.specimen{font-family:var(--display);font-size:clamp(64px,10vw,128px);line-height:.9;font-weight:800;letter-spacing:-.04em}
+.specimen.geist{font-family:var(--body);font-weight:500;letter-spacing:-.03em}
+.scale{display:grid;gap:10px}
+.scale div{display:flex;gap:16px;align-items:baseline;border-bottom:1px dashed var(--line);padding-bottom:8px;min-width:0}
+.scale code{font-family:var(--mono);font-size:11px;color:var(--muted);width:92px;flex:none}
+.weights{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--display);font-size:22px}
+
+/* componentes */
+.comp{grid-template-columns:repeat(3,1fr)}
+.btn{font-family:var(--display);font-weight:600;font-size:15px;border:0;border-radius:12px;padding:11px 18px;cursor:pointer}
+.btn.p{background:var(--brand);color:#fff}
+.btn.s{background:var(--surface-2);color:var(--ink)}
+.btn.g{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px}
+.p-ok{background:var(--ok-bg);color:var(--ok)} .p-warn{background:var(--warn-bg);color:var(--warn)} .p-bad{background:var(--bad-bg);color:var(--bad)} .p-info{background:var(--info-bg);color:var(--info)} .p-vio{background:var(--violet-bg);color:var(--violet)} .p-br{background:var(--brand-soft);color:var(--brand)}
+.field{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.field input,.field select{font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid transparent;border-radius:10px;padding:10px 12px}
+.field input:focus{outline:none;border-color:var(--brand)}
+.kpi b{font-family:var(--display);font-size:36px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi small{color:var(--ok);font-weight:500}
+
+/* módulos */
+.mods{grid-template-columns:repeat(4,1fr)}
+.mod{display:grid;gap:8px;align-content:start}
+.mod .ic{width:36px;height:36px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-family:var(--display);font-weight:800}
+.mod p{font-size:13.5px;color:var(--muted)}
+.mod .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.new{color:var(--brand)} .keep{color:var(--muted)}
+
+/* prévia */
+.app{display:grid;grid-template-columns:200px 1fr;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.side{background:var(--ink);color:var(--bg);padding:18px 12px;display:grid;gap:2px;align-content:start}
+.side .logo{font-family:var(--display);font-weight:800;font-size:22px;padding:4px 10px 16px}
+.side .logo span{color:var(--brand)}
+.side a{font-size:13.5px;padding:7px 10px;border-radius:8px;opacity:.7;text-decoration:none;color:inherit}
+.side a.on{opacity:1;background:rgba(127,127,127,.18)}
+.side .grp{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.45;padding:12px 10px 4px}
+.main{padding:20px;display:grid;gap:16px;min-width:0}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bar h3{font-size:22px;margin-right:auto}
+.kanban{display:grid;grid-template-columns:repeat(4,minmax(200px,1fr));gap:12px;overflow-x:auto;padding-bottom:4px}
+.col{background:var(--surface-2);border-radius:14px;padding:10px;display:grid;gap:8px;align-content:start}
+.col h4{margin:2px 4px 4px;font-family:var(--display);font-size:14px;font-weight:600;display:flex;justify-content:space-between}
+.col h4 span{color:var(--muted);font-weight:500}
+.card{background:var(--surface);border-radius:12px;padding:12px;display:grid;gap:8px;border:1px solid var(--line)}
+.card b{font-family:var(--display);font-weight:600;font-size:14px;line-height:1.25}
+.card .ft{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.av{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:10px;display:grid;place-items:center;font-weight:600}
+.prog{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
+.prog i{display:block;height:100%;background:var(--brand)}
+.notes{grid-template-columns:repeat(3,1fr)}
+.notes li{margin-bottom:6px}
+.notes ul{padding-left:18px;margin:8px 0 0;color:var(--muted);font-size:14px}
+
+@media (max-width:900px){
+  .hero,.type{grid-template-columns:1fr}
+  .pal{grid-template-columns:1fr 1fr}
+  .pal .big{grid-column:1/-1}
+  .sem,.comp,.notes{grid-template-columns:1fr 1fr}
+  .mods{grid-template-columns:1fr 1fr}
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+}
+@media (max-width:520px){.sem,.comp,.mods,.notes{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="sec">
+    <span class="eyebrow">Moodboard · Painel MV · v1 para aprovação</span>
+    <h1>Agência no <em>ritmo</em> certo.</h1>
+    <p class="lead">Direção visual para a nova versão do painel. A ideia é manter o laranja que já é da marca, trocar o visual "vidro" por superfícies sólidas e calmas, e deixar a tipografia carregar a personalidade.</p>
+  </div>
+  <div class="box sec">
+    <span class="eyebrow">Palavras-chave</span>
+    <div class="keywords">
+      <span class="kw on">Firme</span><span class="kw">Operacional</span><span class="kw on">Quente</span><span class="kw">Organizado</span><span class="kw">Direto</span><span class="kw on">Confiante</span>
+    </div>
+    <p style="font-size:14px;color:var(--muted)">Referência funcional: Orkestrya (gestão de demandas, aprovação e agendamento para agências). Referência de tom: ferramentas de trabalho diário, sem enfeite.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="sec-head"><h2>Paleta</h2><span class="eyebrow">Claro e escuro · tokens</span></div>
+  <div class="grid pal">
+    <div class="sw big"><div class="chip" style="background:var(--brand)"></div><div class="meta"><b>Laranja MV</b><span>#ED4B00 · ação primária, destaques</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="meta"><b>Tinta</b><span>#16141A · texto, sidebar</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--bg)"></div><div class="meta"><b>Papel</b><span>#F6F4F2 · fundo</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--brand-soft)"></div><div class="meta"><b>Laranja suave</b><span>#FFE6D9 · fundos de ícone</span></div></div>
+    <div class="sw"><div class="chip" style="background:var(--muted)"></div><div class="meta"><b>Grafite</b><span>#6F6A73 · texto secundário</span></div></div>
+  </div>
+  <div class="ramp" aria-label="Escala do laranja">
+    <div style="background:#FFF3EC"></div><div style="background:#FFE6D9"></div><div style="background:#FFC4A3"></div><div style="background:#FF9A66"></div><div style="background:#FF7A3D"></div><div style="background:#ED4B00"></div><div style="background:#C23C00"></div><div style="background:#8F2D00"></div><div style="background:#5C1D00"></div>
+  </div>
+  <span class="eyebrow">Cores de status (só para estado, nunca decoração)</span>
+  <div class="grid sem">
+    <div class="semc p-ok"><b>Aprovado</b>#1F9D63</div>
+    <div class="semc p-warn"><b>Aguardando</b>#E0A100</div>
+    <div class="semc p-bad"><b>Atrasado</b>#E5383B</div>
+    <div class="semc p-info"><b>Agendado</b>#3B6FE0</div>
+    <div class="semc p-vio"><b>Em produção</b>#7A5AF0</div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><h2>Tipografia</h2><span class="eyebrow">Gabarito + Geist</span></div>
+  <div class="grid type">
+    <div class="box sec">
+      <span class="eyebrow">Títulos e textos principais</span>
+      <div class="specimen">Gabarito</div>
+      <div class="weights"><span style="font-weight:400">Regular</span><span style="font-weight:600">Semibold</span><span style="font-weight:700">Bold</span><span style="font-weight:800">Extra</span><span style="font-weight:900">Black</span></div>
+      <p style="color:var(--muted);font-size:14px">Geométrica, larga e amigável. Usada em títulos, números de KPI, nomes de cards e botões.</p>
+    </div>
+    <div class="box sec">
+      <span class="eyebrow">Interface e leitura</span>
+      <div class="specimen geist">Geist Sans</div>
+      <p>Briefing recebido de Padaria Aurora às 14h32. Prazo de entrega: sexta, 21/11. Responsável: Marcus.</p>
+      <p style="color:var(--muted);font-size:14px">Neutra e muito legível em tamanho pequeno. Usada em listas, formulários, tabelas e descrições. Geist Mono entra em datas, valores e rótulos.</p>
+    </div>
+  </div>
+  <div class="box scale">
+    <div><code>Display 64</code><span style="font-family:var(--display);font-size:clamp(36px,6vw,64px);font-weight:800;line-height:1">Bom dia, Marcus</span></div>
+    <div><code>H1 32</code><span style="font-family:var(--display);font-size:32px;font-weight:700">Demandas da semana</span></div>
+    <div><code>H2 22</code><span style="font-family:var(--display);font-size:22px;font-weight:600">Aguardando aprovação</span></div>
+    <div><code>Corpo 15</code><span>Carrossel com 6 telas para o lançamento do cardápio de verão.</span></div>
+    <div><code>Rótulo 12</code><span style="font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Prazo · 21 nov · R$ 2.400,00</span></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><h2>Componentes</h2><span class="eyebrow">Botões, status, campos, indicadores</span></div>
+  <div class="grid comp">
+    <div class="box sec"><span class="eyebrow">Botões</span>
+      <div class="row"><button class="btn p">Nova demanda</button><button class="btn s">Filtrar</button><button class="btn g">Cancelar</button></div></div>
+    <div class="box sec"><span class="eyebrow">Etiquetas</span>
+      <div class="row"><span class="pill p-br">Reels</span><span class="pill p-vio">Em produção</span><span class="pill p-warn">Aprovação cliente</span><span class="pill p-ok">Aprovado</span><span class="pill p-info">Agendado</span><span class="pill p-bad">Atrasado</span></div></div>
+    <div class="box sec kpi"><span class="eyebrow">Indicador</span>
+      <b>R$ 18.750</b><span style="font-size:13px;color:var(--muted)">Recebido em novembro · <small>+12% vs. outubro</small></span></div>
+    <div class="box sec"><span class="eyebrow">Campo</span>
+      <label class="field" for="f1">Nome da agência<input id="f1" value="MV Comunicação"></label></div>
+    <div class="box sec"><span class="eyebrow">Seleção</span>
+      <label class="field" for="f2">Tamanho da equipe<select id="f2"><option>Só eu</option><option selected>2 a 5</option><option>6 a 15</option><option>16 ou mais</option></select></label></div>
+    <div class="box sec"><span class="eyebrow">Formas</span>
+      <p style="font-size:14px;color:var(--muted)">Cantos de 16px em blocos, 10–12px em botões e campos, pílulas totalmente arredondadas. Sombra quase nula; separação feita por borda fina e tom de fundo.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><h2>Módulos do sistema</h2><span class="eyebrow">O que entra, com base no exemplo</span></div>
+  <div class="grid mods">
+    <div class="box mod"><div class="ic">◐</div><span class="tag new">Novo</span><h3>Meu Dia</h3><p>Tarefas e prazos de hoje de quem está logado.</p></div>
+    <div class="box mod"><div class="ic">▦</div><span class="tag new">Novo · evolui Projetos</span><h3>Demandas</h3><p>Kanban: Ideias → Em produção → Aprovação → Agendado. Formato, cliente, responsável, prazo e progresso.</p></div>
+    <div class="box mod"><div class="ic">✓</div><span class="tag new">Novo</span><h3>Aprovação</h3><p>Fila do que o cliente precisa aprovar, com comentários e histórico.</p></div>
+    <div class="box mod"><div class="ic">↗</div><span class="tag new">Novo</span><h3>Agendamento</h3><p>Calendário de publicações por rede social e cliente.</p></div>
+    <div class="box mod"><div class="ic">◎</div><span class="tag new">Novo</span><h3>Clientes</h3><p>Cadastro, contatos, redes, contratos e demandas de cada cliente.</p></div>
+    <div class="box mod"><div class="ic">◇</div><span class="tag keep">Mantém · Briefings + Propostas</span><h3>Comercial</h3><p>Funil de leads, briefings recebidos e propostas enviadas.</p></div>
+    <div class="box mod"><div class="ic">§</div><span class="tag new">Novo</span><h3>Contratos</h3><p>Vigência, valor mensal, renovação e status.</p></div>
+    <div class="box mod"><div class="ic">$</div><span class="tag new">Novo</span><h3>Financeiro</h3><p>Entradas, saídas, a receber e fluxo do mês.</p></div>
+    <div class="box mod"><div class="ic">▲</div><span class="tag new">Novo</span><h3>Métricas</h3><p>Seguidores, alcance e crescimento por cliente.</p></div>
+    <div class="box mod"><div class="ic">▤</div><span class="tag keep">Mantém</span><h3>Agenda</h3><p>Reuniões e eventos, integrada aos prazos das demandas.</p></div>
+    <div class="box mod"><div class="ic">✎</div><span class="tag keep">Mantém</span><h3>Notas</h3><p>Anotações rápidas, agora ligáveis a cliente ou demanda.</p></div>
+    <div class="box mod"><div class="ic">⚙</div><span class="tag new">Novo</span><h3>Configurações</h3><p>Equipe, permissões, marca e integrações.</p></div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><h2>Prévia da direção</h2><span class="eyebrow">Tela de Demandas · dados de exemplo</span></div>
+  <div class="app">
+    <nav class="side" aria-label="Menu de exemplo">
+      <div class="logo">MV<span>.</span></div>
+      <a href="#" class="on">Início</a><a href="#">Meu Dia</a><a href="#">Agenda</a>
+      <div class="grp">Produção</div><a href="#">Demandas</a><a href="#">Aprovação</a><a href="#">Agendamento</a><a href="#">Métricas</a>
+      <div class="grp">Negócio</div><a href="#">Clientes</a><a href="#">Comercial</a><a href="#">Contratos</a><a href="#">Financeiro</a>
+    </nav>
+    <div class="main">
+      <div class="bar"><h3>Demandas</h3><span class="pill p-br">Todos os clientes</span><button class="btn p">Nova demanda</button></div>
+      <div class="kanban">
+        <div class="col"><h4>Ideias <span>3</span></h4>
+          <div class="card"><div class="row"><span class="pill p-br">Carrossel</span></div><b>Cardápio de verão</b><div class="prog"><i style="width:10%"></i></div><div class="ft">Padaria Aurora<span class="av">MV</span></div></div>
+          <div class="card"><div class="row"><span class="pill p-br">Stories</span></div><b>Bastidores da obra</b><div class="ft">Casa Lume<span class="av">JS</span></div></div>
+        </div>
+        <div class="col"><h4>Em produção <span>4</span></h4>
+          <div class="card"><div class="row"><span class="pill p-vio">Reels</span><span class="pill p-bad">Atrasado</span></div><b>Lançamento linha fit</b><div class="prog"><i style="width:60%"></i></div><div class="ft">18 nov<span class="av">MV</span></div></div>
+        </div>
+        <div class="col"><h4>Aprovação cliente <span>2</span></h4>
+          <div class="card"><div class="row"><span class="pill p-warn">Post</span></div><b>Black Friday · peça 1</b><div class="prog"><i style="width:90%"></i></div><div class="ft">21 nov<span class="av">JS</span></div></div>
+        </div>
+        <div class="col"><h4>Agendado <span>5</span></h4>
+          <div class="card"><div class="row"><span class="pill p-info">Vídeo</span><span class="pill p-ok">Aprovado</span></div><b>Depoimento cliente</b><div class="prog"><i style="width:100%"></i></div><div class="ft">22 nov · 18h<span class="av">MV</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="sec-head"><h2>Decisões para você aprovar</h2></div>
+  <div class="grid notes">
+    <div class="box"><h3>Visual</h3><ul><li>Sai o efeito vidro, entram superfícies sólidas.</li><li>Sidebar escura fixa no desktop, barra inferior no celular.</li><li>Ícones de linha no lugar dos emojis.</li></ul></div>
+    <div class="box"><h3>Tipografia</h3><ul><li>Gabarito em títulos, KPIs, botões e nomes de cards.</li><li>Geist Sans no resto; Geist Mono em datas e valores.</li><li>Saem Oswald, DM Sans e Titillium.</li></ul></div>
+    <div class="box"><h3>Estrutura</h3><ul><li>Menu em 3 grupos: Dia a dia, Produção, Negócio.</li><li>Projetos vira Demandas (kanban).</li><li>Briefings e Propostas ficam dentro de Comercial.</li></ul></div>
+  </div>
+</section>
+
+</div>
