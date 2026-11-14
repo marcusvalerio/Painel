@@ -17,7 +17,7 @@ export default async function PainelLayout({ children }: { children: React.React
         </div>
       </aside>
       <nav className="mobilebar">
-        <Link href="/app">Início</Link><Link href="/app/demandas">Demandas</Link><Link href="/app/clientes">Clientes</Link>
+        <Link href="/app">Início</Link><Link href="/app/demandas">Demandas</Link><Link href="/app/agendamento">Agendamento</Link><Link href="/app/clientes">Clientes</Link><Link href="/app/comercial">Comercial</Link><Link href="/app/contratos">Contratos</Link><Link href="/app/financeiro">Financeiro</Link>
       </nav>
       <main className="main">
         {s.subscriptionStatus !== "ativa" && (

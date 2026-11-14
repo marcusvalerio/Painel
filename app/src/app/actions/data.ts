@@ -72,3 +72,69 @@ export async function clientReview(token: string, fd: FormData) {
   }
   revalidatePath(`/aprovar/${token}`);
 }
+
+function cents(v: FormDataEntryValue | null) {
+  return Math.round(Number(String(v ?? "0").replace(/\./g, "").replace(",", ".")) * 100) || 0;
+}
+
+async function ownClient(tenantId: string, id: FormDataEntryValue | null) {
+  if (!id) return null;
+  const ok = await sql`select 1 from clients where id = ${id} and tenant_id = ${tenantId}`;
+  return ok.length ? String(id) : null;
+}
+
+export async function createTransaction(fd: FormData) {
+  const s = await requireSession();
+  const description = String(fd.get("description") ?? "").trim();
+  const kind = fd.get("kind") === "saida" ? "saida" : "entrada";
+  if (!description) return;
+  await sql`insert into transactions (tenant_id, client_id, kind, description, amount_cents, due_on, paid_on)
+    values (${s.tenantId}, ${await ownClient(s.tenantId, fd.get("client_id"))}, ${kind}, ${description}, ${cents(fd.get("amount"))},
+            ${fd.get("due_on") || null}, ${fd.get("paid") ? new Date().toISOString().slice(0, 10) : null})`;
+  revalidatePath("/app/financeiro");
+}
+
+export async function markPaid(id: string) {
+  const s = await requireSession();
+  await sql`update transactions set paid_on = current_date where id = ${id} and tenant_id = ${s.tenantId}`;
+  revalidatePath("/app/financeiro");
+}
+
+export async function createContract(fd: FormData) {
+  const s = await requireSession();
+  const title = String(fd.get("title") ?? "").trim();
+  if (!title) return;
+  await sql`insert into contracts (tenant_id, client_id, title, value_cents, starts_on, ends_on)
+    values (${s.tenantId}, ${await ownClient(s.tenantId, fd.get("client_id"))}, ${title}, ${cents(fd.get("value"))},
+            ${fd.get("starts_on") || null}, ${fd.get("ends_on") || null})`;
+  revalidatePath("/app/contratos");
+}
+
+const LEAD_STAGES = ["novo", "briefing", "proposta", "fechado", "perdido"];
+
+export async function createLead(fd: FormData) {
+  const s = await requireSession();
+  const name = String(fd.get("name") ?? "").trim();
+  if (!name) return;
+  await sql`insert into leads (tenant_id, name, contact, source, value_cents)
+    values (${s.tenantId}, ${name}, ${fd.get("contact") || null}, ${fd.get("source") || null}, ${cents(fd.get("value"))})`;
+  revalidatePath("/app/comercial");
+}
+
+export async function moveLead(id: string, stage: string) {
+  const s = await requireSession();
+  if (!LEAD_STAGES.includes(stage)) return;
+  await sql`update leads set stage = ${stage} where id = ${id} and tenant_id = ${s.tenantId}`;
+  revalidatePath("/app/comercial");
+}
+
+export async function scheduleDemand(fd: FormData) {
+  const s = await requireSession();
+  const id = String(fd.get("id") ?? "");
+  const when = String(fd.get("scheduled_at") ?? "");
+  if (!id || !when) return;
+  await sql`update demands set scheduled_at = ${new Date(when + ":00-03:00")}, caption = coalesce(nullif(${String(fd.get("caption") ?? "")}, ''), caption),
+    stage = case when stage in ('ideias','producao','aprovacao') and approval_status = 'aprovado' then 'agendado' else stage end
+    where id = ${id} and tenant_id = ${s.tenantId}`;
+  revalidatePath("/app/agendamento");
+}
