@@ -16,6 +16,8 @@ export type Session = {
   role: string;
   planId: string | null;
   subscriptionStatus: string;
+  mustChangePassword: boolean;
+  isSuperadmin: boolean;
 };
 
 export async function createSession(userId: string, tenantId: string) {
@@ -37,7 +39,7 @@ export async function getSession(): Promise<Session | null> {
   if (!token) return null;
   const rows = await sql`
     select u.id as user_id, u.name as user_name, u.email, t.id as tenant_id, t.name as tenant_name,
-           m.role, t.plan_id, t.subscription_status
+           m.role, t.plan_id, t.subscription_status, u.must_change_password, u.is_superadmin
     from sessions s
     join users u on u.id = s.user_id
     join tenants t on t.id = s.tenant_id
@@ -49,6 +51,7 @@ export async function getSession(): Promise<Session | null> {
     userId: r.user_id, userName: r.user_name, email: r.email,
     tenantId: r.tenant_id, tenantName: r.tenant_name, role: r.role,
     planId: r.plan_id, subscriptionStatus: r.subscription_status,
+    mustChangePassword: r.must_change_password, isSuperadmin: r.is_superadmin,
   };
 }
 

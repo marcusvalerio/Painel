@@ -130,3 +130,5 @@ insert into plans (id,name,price_cents,max_users,max_clients,status) values
  ('agencia','Agência',19700,5,20,'teste'),
  ('estudio','Estúdio',39700,null,null,'teste')
 on conflict (id) do nothing;
+
+alter table users add column if not exists must_change_password boolean not null default false;
