@@ -21,7 +21,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .btn-ghost { background: transparent; border: 1px solid var(--line); }
 .btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .field { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
-.field input, .field select, .field textarea { font-size: 15px; color: var(--fg); background: var(--surface-2); border: 1px solid transparent; border-radius: 10px; padding: 10px 12px; }
+.field input, .field select, .field textarea { font-size: 16px; color: var(--fg); background: var(--surface-2); border: 1px solid transparent; border-radius: 10px; padding: 10px 12px; }
 .pill { display: inline-block; font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 4px; color: #0F1E36; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 20px; }
 .muted { color: var(--muted); }
@@ -100,3 +100,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .cal-d { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; min-height: 96px; padding: 6px; display: grid; gap: 4px; align-content: start; }
 .cal-n { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .cal-p { font-size: 11.5px; color: #0F1E36; border-radius: 4px; padding: 3px 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* iPhone dá zoom em campos com fonte menor que 16px */
+input, select, textarea { font-size: max(16px, 1em); }

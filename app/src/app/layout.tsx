@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Gabarito, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -9,6 +9,12 @@ const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono"
 export const metadata: Metadata = {
   title: "Pauta",
   description: "Gestão de demandas, aprovação e agendamento para agências.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0A1AFF",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
