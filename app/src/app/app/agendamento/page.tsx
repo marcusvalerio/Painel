@@ -19,7 +19,8 @@ export default async function Agendamento({ searchParams }: { searchParams: Prom
   const days = new Date(Date.UTC(y, mo + 1, 0)).getUTCDate();
   const lead = (first.getUTCDay() + 6) % 7; // semana começa na segunda
   const fmt = (d: Date) => d.toISOString().slice(0, 7);
-  const label = first.toLocaleDateString("pt-BR", { month: "long", year: "numeric", timeZone: "UTC" });
+  const raw = first.toLocaleDateString("pt-BR", { month: "long", year: "numeric", timeZone: "UTC" });
+  const label = raw.charAt(0).toUpperCase() + raw.slice(1);
   const byDay: Record<number, typeof posts> = {};
   for (const p of posts) {
     const day = Number(new Date(p.scheduled_at).toLocaleDateString("pt-BR", { day: "numeric", timeZone: "America/Sao_Paulo" }));
@@ -28,19 +29,19 @@ export default async function Agendamento({ searchParams }: { searchParams: Prom
   return (
     <>
       <div className="head">
-        <h1 style={{ textTransform: "capitalize" }}>{label}</h1>
+        <h1>{label}</h1>
         <div style={{ display: "flex", gap: 8 }}>
           <a className="btn btn-ghost" href={`?m=${fmt(new Date(Date.UTC(y, mo - 1, 1)))}`}>← Anterior</a>
           <a className="btn btn-ghost" href={`?m=${fmt(next)}`}>Próximo →</a>
         </div>
       </div>
       <div className="banner" style={{ background: "var(--sky)" }}>A publicação automática no Instagram e Facebook será ativada quando a integração com a Meta for aprovada. Por enquanto o calendário serve para planejar.</div>
-      <form action={scheduleDemand} className="card inline-form" style={{ gridTemplateColumns: "2fr 1fr 2fr auto" }}>
+      {pending.length === 0 ? <div className="card muted">Nenhuma demanda sem data. Crie uma em Demandas para agendar aqui.</div> : <form action={scheduleDemand} className="card inline-form" style={{ gridTemplateColumns: "2fr 1fr 2fr auto" }}>
         <label className="field" htmlFor="s-id">Demanda<select id="s-id" name="id" required>{pending.map((d) => <option key={d.id} value={d.id}>{d.title}{d.cliente ? ` · ${d.cliente}` : ""}</option>)}</select></label>
         <label className="field" htmlFor="s-when">Data e hora<input id="s-when" name="scheduled_at" type="datetime-local" required /></label>
         <label className="field" htmlFor="s-cap">Legenda<input id="s-cap" name="caption" placeholder="Opcional" /></label>
         <button className="btn btn-blue">Agendar</button>
-      </form>
+      </form>}
       <div className="scroll"><div className="calendar">
         {["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].map((d) => <div key={d} className="cal-h">{d}</div>)}
         {Array.from({ length: lead }).map((_, i) => <div key={`e${i}`} />)}
@@ -55,6 +56,16 @@ export default async function Agendamento({ searchParams }: { searchParams: Prom
           </div>
         ))}
       </div></div>
+      {posts.length > 0 && (
+        <section className="card">
+          <h2 style={{ fontSize: 18, marginBottom: 10 }}>Posts do mês</h2>
+          <div className="list">{posts.map((p) => (
+            <div key={p.id} className="row">
+              <span className="pill" style={{ background: FORMAT_COLOR[p.format] }}>{new Date(p.scheduled_at).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" })}</span>
+              <b>{p.title}</b><span className="muted">{p.cliente ?? ""}</span>
+            </div>))}</div>
+        </section>
+      )}
     </>
   );
 }
