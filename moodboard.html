@@ -5,22 +5,23 @@
 <style>
 /* Layout: prancha de moodboard em blocos — direção, paleta, tipo, componentes, módulos novos, prévia */
 :root{
-  --brand:#ED4B00; --brand-2:#FF7A3D; --brand-soft:#FFE6D9;
-  --ink:#16141A; --graphite:#2A2730; --bg:#F6F4F2; --surface:#FFFFFF; --surface-2:#EFECE8;
-  --muted:#6F6A73; --line:rgba(22,20,26,.09);
-  --ok:#1F9D63; --warn:#E0A100; --bad:#E5383B; --info:#3B6FE0; --violet:#7A5AF0;
-  --ok-bg:#E3F5EC; --warn-bg:#FBF1D6; --bad-bg:#FCE4E4; --info-bg:#E4ECFC; --violet-bg:#EEE9FD;
+  --brand:#0A1AFF; --brand-2:#1E50A2; --brand-soft:#E3E6FF;
+  --ink:#0F1E36; --graphite:#433127; --bg:#EBEADF; --surface:#F7F6F0; --surface-2:#E2E0D3; --sand:#BFAC8E; --slate:#657278;
+  --muted:#5E6670; --line:rgba(15,30,54,.10);
+  --ok:#1E7A55; --warn:#8A6A12; --bad:#B23A4F; --info:#1E50A2; --violet:#9A3E6E;
+  --ok-bg:#A6DCC3; --warn-bg:#E9D79A; --bad-bg:#F4A18C; --info-bg:#AECBE6; --violet-bg:#EE9CC4;
+  --tag-ink:#0F1E36;
   --display:'Gabarito',system-ui,sans-serif; --body:'Geist',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace;
   --r:16px; --r-sm:10px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --brand:#FF5A14; --brand-2:#FF8A52; --brand-soft:#3A1F12;
-  --ink:#F3F0EE; --graphite:#D9D4D0; --bg:#0E0D11; --surface:#17161B; --surface-2:#201E25; --muted:#9590A0; --line:rgba(255,255,255,.08);
-  --ok-bg:#12301F; --warn-bg:#33290D; --bad-bg:#371517; --info-bg:#152240; --violet-bg:#231B3D; color-scheme:dark}}
+  --brand:#4D5BFF; --brand-2:#6E94D6; --brand-soft:#1A1F5C;
+  --ink:#EBEADF; --graphite:#D8CBB4; --bg:#0B1220; --surface:#121B2D; --surface-2:#1A2539; --muted:#97A0AC; --line:rgba(235,234,223,.09);
+  --ok-bg:#7CC7A5; --warn-bg:#D9C27A; --bad-bg:#E98A74; --info-bg:#8FB4DA; --violet-bg:#DE85B1; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --brand:#FF5A14; --brand-2:#FF8A52; --brand-soft:#3A1F12;
-  --ink:#F3F0EE; --graphite:#D9D4D0; --bg:#0E0D11; --surface:#17161B; --surface-2:#201E25; --muted:#9590A0; --line:rgba(255,255,255,.08);
-  --ok-bg:#12301F; --warn-bg:#33290D; --bad-bg:#371517; --info-bg:#152240; --violet-bg:#231B3D; color-scheme:dark}
+  --brand:#4D5BFF; --brand-2:#6E94D6; --brand-soft:#1A1F5C;
+  --ink:#EBEADF; --graphite:#D8CBB4; --bg:#0B1220; --surface:#121B2D; --surface-2:#1A2539; --muted:#97A0AC; --line:rgba(235,234,223,.09);
+  --ok-bg:#7CC7A5; --warn-bg:#D9C27A; --bad-bg:#E98A74; --info-bg:#8FB4DA; --violet-bg:#DE85B1; color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:48px 80px;display:grid;gap:56px}
@@ -74,8 +75,9 @@ p{margin:0}
 .btn.g{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.pill{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px}
-.p-ok{background:var(--ok-bg);color:var(--ok)} .p-warn{background:var(--warn-bg);color:var(--warn)} .p-bad{background:var(--bad-bg);color:var(--bad)} .p-info{background:var(--info-bg);color:var(--info)} .p-vio{background:var(--violet-bg);color:var(--violet)} .p-br{background:var(--brand-soft);color:var(--brand)}
+.pill{font-size:12px;font-weight:500;padding:3px 9px;border-radius:4px}
+.p-ok{background:var(--ok-bg)} .p-warn{background:var(--warn-bg)} .p-bad{background:var(--bad-bg)} .p-info{background:var(--info-bg)} .p-vio{background:var(--violet-bg)} .p-br{background:var(--brand);color:#fff!important}
+.pill,.semc{color:#0F1E36}
 .field{display:grid;gap:6px;font-size:13px;color:var(--muted)}
 .field input,.field select{font:inherit;font-size:15px;color:var(--ink);background:var(--surface-2);border:1px solid transparent;border-radius:10px;padding:10px 12px}
 .field input:focus{outline:none;border-color:var(--brand)}
@@ -92,7 +94,7 @@ p{margin:0}
 
 /* prévia */
 .app{display:grid;grid-template-columns:200px 1fr;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
-.side{background:var(--ink);color:var(--bg);padding:18px 12px;display:grid;gap:2px;align-content:start}
+.side{background:var(--brand);color:#fff;padding:18px 12px;display:grid;gap:2px;align-content:start}
 .side .logo{font-family:var(--display);font-weight:800;font-size:22px;padding:4px 10px 16px}
 .side .logo span{color:var(--brand)}
 .side a{font-size:13.5px;padding:7px 10px;border-radius:8px;opacity:.7;text-decoration:none;color:inherit}
@@ -108,7 +110,7 @@ p{margin:0}
 .card{background:var(--surface);border-radius:12px;padding:12px;display:grid;gap:8px;border:1px solid var(--line)}
 .card b{font-family:var(--display);font-weight:600;font-size:14px;line-height:1.25}
 .card .ft{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
-.av{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:10px;display:grid;place-items:center;font-weight:600}
+.av{width:22px;height:22px;border-radius:50%;background:var(--brand-2);color:#fff;font-size:10px;display:grid;place-items:center;font-weight:600}
 .prog{height:4px;border-radius:4px;background:var(--line);overflow:hidden}
 .prog i{display:block;height:100%;background:var(--brand)}
 .notes{grid-template-columns:repeat(3,1fr)}
@@ -131,14 +133,14 @@ p{margin:0}
 
 <header class="hero">
   <div class="sec">
-    <span class="eyebrow">Moodboard · Painel MV · v1 para aprovação</span>
+    <span class="eyebrow">Moodboard · Painel MV · v2 para aprovação</span>
     <h1>Agência no <em>ritmo</em> certo.</h1>
-    <p class="lead">Direção visual para a nova versão do painel. A ideia é manter o laranja que já é da marca, trocar o visual "vidro" por superfícies sólidas e calmas, e deixar a tipografia carregar a personalidade.</p>
+    <p class="lead">Direção visual para a nova versão do painel. Azul elétrico como assinatura, azul ruri e marinho de apoio, papel e areia como base, e etiquetas pastel para status. A ideia é trocar o visual "vidro" por superfícies sólidas e calmas, e deixar a tipografia carregar a personalidade.</p>
   </div>
   <div class="box sec">
     <span class="eyebrow">Palavras-chave</span>
     <div class="keywords">
-      <span class="kw on">Firme</span><span class="kw">Operacional</span><span class="kw on">Quente</span><span class="kw">Organizado</span><span class="kw">Direto</span><span class="kw on">Confiante</span>
+      <span class="kw on">Firme</span><span class="kw">Operacional</span><span class="kw on">Elétrico</span><span class="kw">Organizado</span><span class="kw">Direto</span><span class="kw on">Confiante</span>
     </div>
     <p style="font-size:14px;color:var(--muted)">Referência funcional: Orkestrya (gestão de demandas, aprovação e agendamento para agências). Referência de tom: ferramentas de trabalho diário, sem enfeite.</p>
   </div>
@@ -147,22 +149,27 @@ p{margin:0}
 <section class="sec">
   <div class="sec-head"><h2>Paleta</h2><span class="eyebrow">Claro e escuro · tokens</span></div>
   <div class="grid pal">
-    <div class="sw big"><div class="chip" style="background:var(--brand)"></div><div class="meta"><b>Laranja MV</b><span>#ED4B00 · ação primária, destaques</span></div></div>
-    <div class="sw"><div class="chip" style="background:var(--ink)"></div><div class="meta"><b>Tinta</b><span>#16141A · texto, sidebar</span></div></div>
-    <div class="sw"><div class="chip" style="background:var(--bg)"></div><div class="meta"><b>Papel</b><span>#F6F4F2 · fundo</span></div></div>
-    <div class="sw"><div class="chip" style="background:var(--brand-soft)"></div><div class="meta"><b>Laranja suave</b><span>#FFE6D9 · fundos de ícone</span></div></div>
-    <div class="sw"><div class="chip" style="background:var(--muted)"></div><div class="meta"><b>Grafite</b><span>#6F6A73 · texto secundário</span></div></div>
+    <div class="sw big"><div class="chip" style="background:#0A1AFF"></div><div class="meta"><b>Azul Elétrico</b><span>#0A1AFF · marca, sidebar, ação primária</span></div></div>
+    <div class="sw"><div class="chip" style="background:#1E50A2"></div><div class="meta"><b>Azul Ruri</b><span>#1E50A2 · links, info, avatares</span></div></div>
+    <div class="sw"><div class="chip" style="background:#0F1E36"></div><div class="meta"><b>Marinho</b><span>#0F1E36 · texto, monograma</span></div></div>
+    <div class="sw"><div class="chip" style="background:#EBEADF"></div><div class="meta"><b>Papel</b><span>#EBEADF · fundo</span></div></div>
+    <div class="sw"><div class="chip" style="background:#BFAC8E"></div><div class="meta"><b>Areia</b><span>#BFAC8E · detalhes, divisórias</span></div></div>
   </div>
-  <div class="ramp" aria-label="Escala do laranja">
-    <div style="background:#FFF3EC"></div><div style="background:#FFE6D9"></div><div style="background:#FFC4A3"></div><div style="background:#FF9A66"></div><div style="background:#FF7A3D"></div><div style="background:#ED4B00"></div><div style="background:#C23C00"></div><div style="background:#8F2D00"></div><div style="background:#5C1D00"></div>
+  <div class="grid pal" style="grid-template-columns:repeat(3,1fr)">
+    <div class="sw"><div class="chip" style="background:#433127;height:64px"></div><div class="meta"><b>Café</b><span>#433127 · apoio, gráficos</span></div></div>
+    <div class="sw"><div class="chip" style="background:#657278;height:64px"></div><div class="meta"><b>Ardósia</b><span>#657278 · ícones, texto terciário</span></div></div>
+    <div class="sw"><div class="chip" style="background:#AD904E;height:64px"></div><div class="meta"><b>Ocre</b><span>#AD904E · gráficos, ênfase rara</span></div></div>
   </div>
-  <span class="eyebrow">Cores de status (só para estado, nunca decoração)</span>
+  <div class="ramp" aria-label="Escala do azul">
+    <div style="background:#E3E6FF"></div><div style="background:#C2C8FF"></div><div style="background:#8E99FF"></div><div style="background:#4D5BFF"></div><div style="background:#0A1AFF"></div><div style="background:#0A14C8"></div><div style="background:#1E50A2"></div><div style="background:#16326B"></div><div style="background:#0F1E36"></div>
+  </div>
+  <span class="eyebrow">Etiquetas de status · tons pastel com texto marinho, como no tablet</span>
   <div class="grid sem">
-    <div class="semc p-ok"><b>Aprovado</b>#1F9D63</div>
-    <div class="semc p-warn"><b>Aguardando</b>#E0A100</div>
-    <div class="semc p-bad"><b>Atrasado</b>#E5383B</div>
-    <div class="semc p-info"><b>Agendado</b>#3B6FE0</div>
-    <div class="semc p-vio"><b>Em produção</b>#7A5AF0</div>
+    <div class="semc p-ok"><b>Aprovado</b>#A6DCC3</div>
+    <div class="semc p-warn"><b>Aguardando</b>#E9D79A</div>
+    <div class="semc p-bad"><b>Atrasado</b>#F4A18C</div>
+    <div class="semc p-info"><b>Agendado</b>#AECBE6</div>
+    <div class="semc p-vio"><b>Em produção</b>#EE9CC4</div>
   </div>
 </section>
 
@@ -260,7 +267,7 @@ p{margin:0}
 <section class="sec">
   <div class="sec-head"><h2>Decisões para você aprovar</h2></div>
   <div class="grid notes">
-    <div class="box"><h3>Visual</h3><ul><li>Sai o efeito vidro, entram superfícies sólidas.</li><li>Sidebar escura fixa no desktop, barra inferior no celular.</li><li>Ícones de linha no lugar dos emojis.</li></ul></div>
+    <div class="box"><h3>Visual</h3><ul><li>Sidebar em azul elétrico; fundo papel, nada de branco puro.</li><li>Etiquetas retangulares pastel; laranja fora.</li><li>Ícones de linha no lugar dos emojis.</li></ul></div>
     <div class="box"><h3>Tipografia</h3><ul><li>Gabarito em títulos, KPIs, botões e nomes de cards.</li><li>Geist Sans no resto; Geist Mono em datas e valores.</li><li>Saem Oswald, DM Sans e Titillium.</li></ul></div>
     <div class="box"><h3>Estrutura</h3><ul><li>Menu em 3 grupos: Dia a dia, Produção, Negócio.</li><li>Projetos vira Demandas (kanban).</li><li>Briefings e Propostas ficam dentro de Comercial.</li></ul></div>
   </div>
