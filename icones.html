@@ -1,0 +1,75 @@
+<title>Ícone do Pauta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@700&family=Geist:wght@400;500&family=Geist+Mono&display=swap">
+<style>
+/* Layout: grade de 4 propostas, cada uma em 3 tamanhos e num mock de tela inicial */
+:root{--bg:#EBEADF;--fg:#0F1E36;--card:#F7F6F0;--muted:#5E6670;--line:rgba(15,30,54,.1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1220;--fg:#EBEADF;--card:#131C2E;--muted:#9AA3AE;--line:rgba(235,234,223,.1);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1220;--fg:#EBEADF;--card:#131C2E;--muted:#9AA3AE;--line:rgba(235,234,223,.1);color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:'Geist',system-ui,sans-serif;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+h1{font-family:'Gabarito',sans-serif;font-size:clamp(34px,5vw,52px);margin:0;letter-spacing:-.02em}
+h2{font-family:'Gabarito',sans-serif;font-size:22px;margin:0}
+.lead{color:var(--muted);max-width:60ch;margin:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.opt{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:14px}
+.sizes{display:flex;gap:18px;align-items:end;flex-wrap:wrap}
+.sizes svg{display:block;border-radius:22.5%;box-shadow:0 8px 24px -10px rgba(15,30,54,.4)}
+.tag{font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.opt p{margin:0;color:var(--muted);font-size:14.5px}
+.rec{outline:2px solid #0A1AFF}
+.badge{display:inline-block;background:#0A1AFF;color:#fff;font-size:11px;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;font-family:'Geist',sans-serif}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+  <h1>Ícone do app</h1>
+  <p class="lead">Quatro caminhos dentro da paleta aprovada. Cada um aparece em 120, 64 e 32 px, que é o tamanho da aba do navegador, onde ícone ruim se revela.</p>
+  <div class="grid">
+
+    <div class="opt rec">
+      <span class="tag">A · Etiquetas <span class="badge">Recomendo</span></span>
+      <div class="sizes">
+        <svg width="120" height="120" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A1AFF"/><g transform="rotate(-30 50 50)"><rect x="14" y="30" width="34" height="13" fill="#A6DCC3"/><rect x="52" y="30" width="34" height="13" fill="#EE9CC4"/><rect x="22" y="47" width="30" height="13" fill="#F4A18C"/><rect x="56" y="47" width="30" height="13" fill="#AECBE6"/><rect x="30" y="64" width="40" height="13" fill="#E9D79A"/></g></svg>
+        <svg width="64" height="64" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A1AFF"/><g transform="rotate(-30 50 50)"><rect x="14" y="30" width="34" height="13" fill="#A6DCC3"/><rect x="52" y="30" width="34" height="13" fill="#EE9CC4"/><rect x="22" y="47" width="30" height="13" fill="#F4A18C"/><rect x="56" y="47" width="30" height="13" fill="#AECBE6"/><rect x="30" y="64" width="40" height="13" fill="#E9D79A"/></g></svg>
+        <svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A1AFF"/><g transform="rotate(-30 50 50)"><rect x="14" y="30" width="34" height="13" fill="#A6DCC3"/><rect x="52" y="30" width="34" height="13" fill="#EE9CC4"/><rect x="22" y="47" width="30" height="13" fill="#F4A18C"/><rect x="56" y="47" width="30" height="13" fill="#AECBE6"/><rect x="30" y="64" width="40" height="13" fill="#E9D79A"/></g></svg>
+      </div>
+      <h2>As etiquetas do tablet</h2>
+      <p>Pega direto a referência que você mandou: as tarefas em diagonal sobre o azul elétrico. Não depende do nome do produto, então continua valendo se o nome mudar.</p>
+    </div>
+
+    <div class="opt">
+      <span class="tag">B · Monograma</span>
+      <div class="sizes">
+        <svg width="120" height="120" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A1AFF"/><text x="50" y="73" text-anchor="middle" font-family="Gabarito" font-weight="700" font-size="76" fill="#EBEADF">p</text><rect x="64" y="22" width="14" height="14" fill="#E9D79A"/></svg>
+        <svg width="64" height="64" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A1AFF"/><text x="50" y="73" text-anchor="middle" font-family="Gabarito" font-weight="700" font-size="76" fill="#EBEADF">p</text><rect x="64" y="22" width="14" height="14" fill="#E9D79A"/></svg>
+        <svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0A1AFF"/><text x="50" y="73" text-anchor="middle" font-family="Gabarito" font-weight="700" font-size="76" fill="#EBEADF">p</text><rect x="64" y="22" width="14" height="14" fill="#E9D79A"/></svg>
+      </div>
+      <h2>"p" em Gabarito</h2>
+      <p>A letra inicial com um quadradinho amarelo, que é o mesmo ponto do logo. Simples e muito legível no tamanho pequeno, mas fica preso ao nome.</p>
+    </div>
+
+    <div class="opt">
+      <span class="tag">C · Pauta</span>
+      <div class="sizes">
+        <svg width="120" height="120" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0F1E36"/><rect x="20" y="28" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="46" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="64" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="28" width="34" height="7" rx="1" fill="#0A1AFF"/><rect x="20" y="46" width="48" height="7" rx="1" fill="#A6DCC3"/><rect x="20" y="64" width="22" height="7" rx="1" fill="#EE9CC4"/></svg>
+        <svg width="64" height="64" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0F1E36"/><rect x="20" y="28" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="46" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="64" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="28" width="34" height="7" rx="1" fill="#0A1AFF"/><rect x="20" y="46" width="48" height="7" rx="1" fill="#A6DCC3"/><rect x="20" y="64" width="22" height="7" rx="1" fill="#EE9CC4"/></svg>
+        <svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0F1E36"/><rect x="20" y="28" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="46" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="64" width="60" height="7" rx="1" fill="#EBEADF" opacity=".35"/><rect x="20" y="28" width="34" height="7" rx="1" fill="#0A1AFF"/><rect x="20" y="46" width="48" height="7" rx="1" fill="#A6DCC3"/><rect x="20" y="64" width="22" height="7" rx="1" fill="#EE9CC4"/></svg>
+      </div>
+      <h2>Linhas de progresso</h2>
+      <p>Três linhas de pauta que também são barras de progresso. Fala de organização e andamento. Fundo marinho para variar do azul.</p>
+    </div>
+
+    <div class="opt">
+      <span class="tag">D · Kanban</span>
+      <div class="sizes">
+        <svg width="120" height="120" viewBox="0 0 100 100"><rect width="100" height="100" fill="#EBEADF"/><rect x="18" y="20" width="18" height="40" rx="3" fill="#0A1AFF"/><rect x="41" y="20" width="18" height="60" rx="3" fill="#0A1AFF"/><rect x="64" y="20" width="18" height="28" rx="3" fill="#0A1AFF"/><rect x="64" y="54" width="18" height="18" rx="3" fill="#A6DCC3"/></svg>
+        <svg width="64" height="64" viewBox="0 0 100 100"><rect width="100" height="100" fill="#EBEADF"/><rect x="18" y="20" width="18" height="40" rx="3" fill="#0A1AFF"/><rect x="41" y="20" width="18" height="60" rx="3" fill="#0A1AFF"/><rect x="64" y="20" width="18" height="28" rx="3" fill="#0A1AFF"/><rect x="64" y="54" width="18" height="18" rx="3" fill="#A6DCC3"/></svg>
+        <svg width="32" height="32" viewBox="0 0 100 100"><rect width="100" height="100" fill="#EBEADF"/><rect x="18" y="20" width="18" height="40" rx="3" fill="#0A1AFF"/><rect x="41" y="20" width="18" height="60" rx="3" fill="#0A1AFF"/><rect x="64" y="20" width="18" height="28" rx="3" fill="#0A1AFF"/><rect x="64" y="54" width="18" height="18" rx="3" fill="#A6DCC3"/></svg>
+      </div>
+      <h2>Colunas do quadro</h2>
+      <p>O kanban de demandas resumido em três colunas, com um card verde de "aprovado". Fundo papel, o que destaca o ícone em celulares com tema escuro.</p>
+    </div>
+
+  </div>
+</div>
