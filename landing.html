@@ -1,0 +1,424 @@
+<title>Pauta para agências</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: página de vendas longa em faixas alternadas papel / azul elétrico / marinho, CTA a cada dobra */
+:root{
+  --blue:#0A1AFF; --ruri:#1E50A2; --navy:#0F1E36; --paper:#EBEADF; --card:#F7F6F0; --sand:#BFAC8E; --muted:#56606B; --line:rgba(15,30,54,.11);
+  --mint:#A6DCC3; --sky:#AECBE6; --salmon:#F4A18C; --pink:#EE9CC4; --butter:#E9D79A;
+  --bg:var(--paper); --fg:var(--navy); --surface:var(--card);
+  --display:'Gabarito',system-ui,sans-serif; --body:'Geist',system-ui,sans-serif; --mono:'Geist Mono',ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0B1220;--fg:#EBEADF;--surface:#131C2E;--muted:#9AA3AE;--line:rgba(235,234,223,.1);--blue:#3646FF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0B1220;--fg:#EBEADF;--surface:#131C2E;--muted:#9AA3AE;--line:rgba(235,234,223,.1);--blue:#3646FF;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.025em;margin:0;text-wrap:balance;line-height:1.02}
+p{margin:0}
+a{color:inherit}
+.in{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.band{padding-block:96px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.h2{font-size:clamp(34px,5vw,60px)}
+.sub{font-size:19px;color:var(--muted);max-width:58ch}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:17px;padding:16px 26px;border-radius:12px;text-decoration:none;border:0;cursor:pointer;transition:transform .2s cubic-bezier(.2,.8,.2,1),box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--butter);outline-offset:3px}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 10px 30px -10px rgba(10,26,255,.6)}
+.btn-navy{background:var(--navy);color:#EBEADF}
+.btn-paper{background:#EBEADF;color:#0F1E36}
+.btn-line{background:transparent;color:inherit;border:1.5px solid currentColor}
+.arrow{transition:transform .2s}.btn:hover .arrow{transform:translateX(4px)}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.note{font-size:14px;opacity:.7}
+
+/* nav */
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+nav.top .in{display:flex;align-items:center;gap:28px;height:68px}
+.logo{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo i{width:12px;height:12px;background:var(--blue);display:inline-block;border-radius:2px}
+nav.top .links{display:flex;gap:22px;margin-right:auto;font-size:15px}
+nav.top .links a{text-decoration:none;opacity:.75}nav.top .links a:hover{opacity:1}
+nav.top .btn{padding:10px 18px;font-size:15px}
+
+/* hero */
+.hero{padding-block:72px 40px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(46px,7.4vw,96px)}
+.hero h1 .hl{color:var(--blue)}
+.hero .sub{margin-block:24px 32px}
+.checks{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--muted)}
+.checks span::before{content:"✓ ";color:var(--blue);font-weight:700}
+
+/* tag stage (tablet look) */
+.stage{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:28px;background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.stripes{position:absolute;inset:-20%;transform:rotate(-32deg);display:grid;align-content:center;gap:10px}
+.stripe{display:flex;gap:10px;white-space:nowrap;animation:slide 38s linear infinite}
+.stripe:nth-child(2){animation-duration:46s;animation-direction:reverse}
+.stripe:nth-child(3){animation-duration:42s}
+.stripe:nth-child(4){animation-duration:50s;animation-direction:reverse}
+.t{font-size:15px;padding:8px 16px;color:#0F1E36;font-weight:500;border-radius:2px}
+.m{background:var(--mint)}.s{background:var(--sky)}.o{background:var(--salmon)}.p{background:var(--pink)}.b{background:var(--butter)}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.float{position:absolute;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:0 20px 50px -20px rgba(15,30,54,.35);display:grid;gap:6px;font-size:13px}
+.float b{font-family:var(--display);font-size:16px}
+.f1{left:6%;bottom:8%;width:min(250px,60%)}
+.f2{right:6%;top:8%;width:min(210px,52%)}
+.bar{height:5px;border-radius:5px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--blue)}
+.pill{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:3px;color:#0F1E36;font-weight:500}
+
+/* marquee band */
+.ribbon{background:var(--blue);color:#fff;padding-block:18px;overflow:hidden}
+.ribbon .row{display:flex;gap:40px;white-space:nowrap;animation:slide 30s linear infinite;font-family:var(--display);font-size:26px;font-weight:600}
+.ribbon .row span::after{content:"✦";margin-left:40px;opacity:.6}
+
+/* pain */
+.pain-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
+.chaos{display:grid;gap:10px}
+.chaos div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;display:flex;gap:14px;align-items:center}
+.chaos div s{opacity:.55}
+.chaos div em{font-style:normal;font-family:var(--mono);font-size:12px;margin-left:auto;color:var(--muted);white-space:nowrap}
+
+/* modules */
+.mods{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:10px;align-content:start;transition:transform .25s,border-color .25s}
+.mod:hover{transform:translateY(-4px);border-color:var(--blue)}
+.mod .sw{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;font-family:var(--display);font-weight:700;color:#0F1E36}
+.mod h3{font-size:21px}
+.mod p{font-size:14.5px;color:var(--muted)}
+
+/* feature rows */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding-block:56px;border-top:1px solid var(--line)}
+.feat:nth-child(even) .visual{order:-1}
+.feat h3{font-size:clamp(30px,3.6vw,44px);margin-block:12px 16px}
+.feat ul{padding:0;margin:20px 0 28px;list-style:none;display:grid;gap:10px}
+.feat li{padding-left:28px;position:relative}
+.feat li::before{content:"";position:absolute;left:0;top:.5em;width:14px;height:14px;background:var(--blue);border-radius:3px}
+.visual{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;min-width:0}
+.kan{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kcol{background:color-mix(in srgb,var(--fg) 5%,transparent);border-radius:12px;padding:8px;display:grid;gap:8px;align-content:start}
+.kcol h4{margin:4px;font-family:var(--display);font-size:13px;font-weight:600}
+.kc{background:var(--bg);border-radius:9px;padding:10px;display:grid;gap:6px;font-size:12.5px;border:1px solid var(--line)}
+.kc b{font-family:var(--display);font-size:14px;font-weight:600}
+.post{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start}
+.thumb{aspect-ratio:4/5;border-radius:12px;background:linear-gradient(160deg,var(--sky),var(--pink) 60%,var(--butter))}
+.comment{background:var(--bg);border-radius:12px;padding:10px 12px;font-size:13.5px;border:1px solid var(--line)}
+.approve{display:flex;gap:8px;margin-top:4px}
+.approve span{flex:1;text-align:center;padding:10px;border-radius:10px;font-family:var(--display);font-weight:600;font-size:14px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;font-size:11px}
+.cal div{aspect-ratio:1;border-radius:8px;background:color-mix(in srgb,var(--fg) 5%,transparent);padding:5px;display:grid;align-content:space-between;font-family:var(--mono)}
+.cal i{display:block;height:6px;border-radius:2px}
+.dm{display:grid;gap:8px;font-size:14px}
+.dm .in-msg{background:var(--bg);border:1px solid var(--line);border-radius:14px 14px 14px 4px;padding:10px 14px;max-width:80%}
+.dm .out{background:var(--blue);color:#fff;border-radius:14px 14px 4px 14px;padding:10px 14px;max-width:80%;justify-self:end}
+.rule{font-family:var(--mono);font-size:12px;background:var(--butter);color:#0F1E36;padding:8px 12px;border-radius:8px}
+.fin{display:grid;gap:10px}
+.fin .r{display:flex;justify-content:space-between;padding:12px 14px;background:var(--bg);border-radius:10px;border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.big{font-family:var(--display);font-size:46px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.inline-cta{display:flex;justify-content:center;padding-top:24px}
+
+/* navy band: steps */
+.navy{background:#0F1E36;color:#EBEADF}
+.navy .sub{color:#A9B2C0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.step{border-top:2px solid #3646FF;padding-top:20px;display:grid;gap:10px}
+.step .n{font-family:var(--display);font-size:64px;font-weight:700;color:#3646FF;line-height:1}
+.step h3{font-size:24px}
+.step p{color:#A9B2C0}
+
+/* extras */
+.extras{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:48px}
+.extras div{background:var(--bg);padding:26px;display:grid;gap:8px;align-content:start}
+.extras h3{font-size:19px}
+.extras p{font-size:14.5px;color:var(--muted)}
+
+/* compare */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.cmp > div{border-radius:20px;padding:28px;display:grid;gap:12px;align-content:start}
+.cmp .before{background:var(--surface);border:1px solid var(--line)}
+.cmp .after{background:var(--blue);color:#fff}
+.cmp ul{margin:0;padding-left:20px;display:grid;gap:8px}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;align-items:stretch}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:30px;display:flex;flex-direction:column;gap:18px;position:relative}
+.plan.hot{background:#0F1E36;color:#EBEADF;border-color:#0F1E36;transform:translateY(-10px)}
+.plan .badge{position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--butter);color:#0F1E36;padding:4px 9px;border-radius:4px}
+.plan h3{font-size:26px}
+.price{font-family:var(--display);font-weight:700;font-size:52px;letter-spacing:-.03em;line-height:1}
+.price small{font-size:17px;font-weight:500;opacity:.6;letter-spacing:0}
+.plan ul{list-style:none;padding:0;margin:0;display:grid;gap:9px;font-size:15px;flex:1}
+.plan li::before{content:"✓";color:var(--blue);font-weight:700;margin-right:10px}
+.plan.hot li::before{color:#7C88FF}
+.plan .btn{justify-content:center}
+.beta{margin-top:24px;background:var(--butter);color:#0F1E36;border-radius:14px;padding:16px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.beta b{font-family:var(--display)}
+
+/* faq */
+.faq{display:grid;gap:10px;margin-top:40px;max-width:820px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+summary{font-family:var(--display);font-weight:600;font-size:19px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:var(--blue);font-size:24px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin-top:12px;color:var(--muted)}
+
+/* final */
+.final{background:var(--blue);color:#fff;text-align:center;overflow:hidden;position:relative}
+.final h2{font-size:clamp(42px,7vw,92px);max-width:14ch;margin:0 auto}
+.final .sub{color:rgba(255,255,255,.8);margin:24px auto 36px}
+.final .ctas{justify-content:center}
+footer{padding-block:40px;font-size:14px;color:var(--muted)}
+footer .in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+
+/* sticky mobile cta */
+.mcta{display:none}
+@media (max-width:960px){
+  .hero-grid,.pain-grid,.feat,.cmp{grid-template-columns:1fr}
+  .feat:nth-child(even) .visual{order:0}
+  .mods{grid-template-columns:1fr 1fr}
+  .steps,.plans,.extras{grid-template-columns:1fr}
+  .plan.hot{transform:none}
+  nav.top .links{display:none}
+  nav.top .in{justify-content:space-between}
+  .band{padding-block:72px}
+  .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  .mcta .btn{flex:1;justify-content:center}
+  footer{padding-bottom:110px}
+}
+@media (max-width:520px){.mods{grid-template-columns:1fr}.kan{grid-template-columns:1fr 1fr}.kan .kcol:last-child{display:none}.post{grid-template-columns:90px 1fr}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<nav class="top"><div class="in">
+  <a class="logo" href="#topo"><i></i>pauta</a>
+  <div class="links"><a href="#recursos">Recursos</a><a href="#como">Como funciona</a><a href="#planos">Planos</a><a href="#duvidas">Dúvidas</a></div>
+  <a class="btn btn-blue" href="#planos">Assinar agora</a>
+</div></nav>
+
+<header class="hero" id="topo"><div class="in hero-grid">
+  <div>
+    <span class="eyebrow">Sistema de gestão para agências e social medias</span>
+    <h1 style="margin-top:16px">Sua agência inteira <span class="hl">numa pauta só.</span></h1>
+    <p class="sub">Demandas, aprovação de clientes, agendamento de posts, automação de DMs, contratos e financeiro. Tudo no mesmo lugar, sem planilha, sem caça a arquivo no WhatsApp, sem "cadê a aprovação?".</p>
+    <div class="ctas">
+      <a class="btn btn-blue" href="#planos">Quero organizar minha agência <span class="arrow">→</span></a>
+      <a class="btn btn-line" href="#recursos">Ver por dentro</a>
+    </div>
+    <div class="checks"><span>Multiempresa</span><span>Portal do cliente</span><span>Funciona no celular</span></div>
+  </div>
+  <div class="stage" aria-hidden="true">
+    <div class="stripes">
+      <div class="stripe"><span class="t m">Briefing</span><span class="t s">Roteiro</span><span class="t o">Reels</span><span class="t p">Carrossel</span><span class="t b">Aprovado</span><span class="t s">Agendado</span><span class="t m">Legenda</span><span class="t p">Stories</span><span class="t o">Ajuste</span><span class="t s">Contrato</span><span class="t m">Briefing</span><span class="t s">Roteiro</span><span class="t o">Reels</span><span class="t p">Carrossel</span><span class="t b">Aprovado</span><span class="t s">Agendado</span><span class="t m">Legenda</span><span class="t p">Stories</span><span class="t o">Ajuste</span><span class="t s">Contrato</span></div>
+      <div class="stripe"><span class="t p">Proposta</span><span class="t m">Cliente</span><span class="t s">Métricas</span><span class="t b">Pix</span><span class="t o">Prazo</span><span class="t m">Post</span><span class="t s">DM</span><span class="t p">Pauta</span><span class="t m">Equipe</span><span class="t b">Fatura</span><span class="t p">Proposta</span><span class="t m">Cliente</span><span class="t s">Métricas</span><span class="t b">Pix</span><span class="t o">Prazo</span><span class="t m">Post</span><span class="t s">DM</span><span class="t p">Pauta</span><span class="t m">Equipe</span><span class="t b">Fatura</span></div>
+      <div class="stripe"><span class="t s">Calendário</span><span class="t o">Gravação</span><span class="t m">Feed</span><span class="t p">Campanha</span><span class="t s">Relatório</span><span class="t b">Renovação</span><span class="t m">Edição</span><span class="t o">Urgente</span><span class="t s">Arte</span><span class="t p">Copy</span><span class="t s">Calendário</span><span class="t o">Gravação</span><span class="t m">Feed</span><span class="t p">Campanha</span><span class="t s">Relatório</span><span class="t b">Renovação</span><span class="t m">Edição</span><span class="t o">Urgente</span><span class="t s">Arte</span><span class="t p">Copy</span></div>
+      <div class="stripe"><span class="t m">Publicado</span><span class="t p">Comentário</span><span class="t s">Lead</span><span class="t o">Revisão</span><span class="t b">Entregue</span><span class="t m">Briefing</span><span class="t s">Vídeo</span><span class="t p">Story</span><span class="t o">Pendente</span><span class="t m">Meta</span><span class="t m">Publicado</span><span class="t p">Comentário</span><span class="t s">Lead</span><span class="t o">Revisão</span><span class="t b">Entregue</span><span class="t m">Briefing</span><span class="t s">Vídeo</span><span class="t p">Story</span><span class="t o">Pendente</span><span class="t m">Meta</span></div>
+    </div>
+    <div class="float f2"><span class="eyebrow" style="font-size:10px">Hoje</span><b>3 posts aprovados</b><span style="opacity:.7">Padaria Aurora aprovou pelo link</span></div>
+    <div class="float f1"><div><span class="pill" style="background:var(--pink)">Reels</span> <span class="pill" style="background:var(--sky)">Agendado</span></div><b>Lançamento linha verão</b><div class="bar"><i style="width:82%"></i></div><span style="opacity:.7">Sex, 21 nov · 18h00</span></div>
+  </div>
+</div></header>
+
+<div class="ribbon" aria-hidden="true"><div class="row"><span>Demandas</span><span>Aprovação</span><span>Agendamento</span><span>Automação de DMs</span><span>Clientes</span><span>Contratos</span><span>Financeiro</span><span>Métricas</span><span>Demandas</span><span>Aprovação</span><span>Agendamento</span><span>Automação de DMs</span><span>Clientes</span><span>Contratos</span><span>Financeiro</span><span>Métricas</span></div></div>
+
+<section class="band"><div class="in pain-grid">
+  <div>
+    <span class="eyebrow">O problema</span>
+    <h2 class="h2" style="margin-top:14px">Você abre 9 apps pra fazer um post sair.</h2>
+    <p class="sub" style="margin-top:20px">E ainda assim o cliente diz que não viu a arte, o financeiro esquece de cobrar e ninguém sabe quem está com o carrossel de sexta.</p>
+    <div class="ctas" style="margin-top:28px"><a class="btn btn-navy" href="#planos">Chega disso <span class="arrow">→</span></a></div>
+  </div>
+  <div class="chaos">
+    <div><s>Briefing no áudio do WhatsApp</s><em>perdido</em></div>
+    <div><s>Planilha de pauta com 14 abas</s><em>desatualizada</em></div>
+    <div><s>Arte no Drive, versão final_v3_AGORAVAI</s><em>qual é?</em></div>
+    <div><s>Aprovação por print de conversa</s><em>sem histórico</em></div>
+    <div><s>Agendador, Canva, Notion, Trello…</s><em>R$ 300+/mês</em></div>
+    <div><s>Cobrança lembrada no dia 15</s><em>atrasada</em></div>
+    <div style="background:var(--blue);color:#fff;border-color:var(--blue)"><b style="font-family:var(--display)">Pauta resolve tudo isso numa tela.</b><em style="color:#fff;opacity:.8">1 assinatura</em></div>
+  </div>
+</div></section>
+
+<section class="band" id="recursos" style="padding-top:0"><div class="in">
+  <span class="eyebrow">Tudo que sua agência usa</span>
+  <h2 class="h2" style="margin-top:14px;max-width:18ch">Um sistema. Doze módulos. Zero gambiarra.</h2>
+  <div class="mods">
+    <div class="mod"><div class="sw" style="background:var(--sky)">▦</div><h3>Demandas</h3><p>Kanban por cliente, formato, responsável e prazo. Ninguém mais pergunta "com quem tá?".</p></div>
+    <div class="mod"><div class="sw" style="background:var(--mint)">✓</div><h3>Aprovação</h3><p>O cliente aprova ou pede ajuste por um link, sem login. Tudo registrado.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--pink)">↗</div><h3>Agendamento</h3><p>Calendário de posts para Instagram e Facebook, com publicação automática.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--butter)">✦</div><h3>Automação de DMs</h3><p>Palavra-chave no comentário vira DM com link, cupom ou cadastro.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--salmon)">◎</div><h3>Clientes</h3><p>Ficha completa: contatos, redes, acessos, contrato e histórico.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--sky)">◇</div><h3>Comercial</h3><p>Funil de leads, briefing online e proposta bonita em link.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--mint)">§</div><h3>Contratos</h3><p>Vigência, reajuste e aviso de renovação antes de vencer.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--pink)">$</div><h3>Financeiro</h3><p>Mensalidades, a receber, despesas e lucro por cliente.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--butter)">▲</div><h3>Métricas</h3><p>Seguidores, alcance e engajamento de cada conta, mês a mês.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--salmon)">◐</div><h3>Meu Dia</h3><p>Cada pessoa abre o sistema e vê só o que precisa fazer hoje.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--sky)">▤</div><h3>Agenda</h3><p>Reuniões, gravações e prazos no mesmo calendário.</p></div>
+    <div class="mod"><div class="sw" style="background:var(--mint)">⚑</div><h3>Relatórios</h3><p>Relatório mensal do cliente pronto pra mandar, com a sua marca.</p></div>
+  </div>
+  <div class="inline-cta" style="padding-top:40px"><a class="btn btn-blue" href="#planos">Quero tudo isso <span class="arrow">→</span></a></div>
+</div></section>
+
+<section class="in">
+  <div class="feat">
+    <div>
+      <span class="eyebrow">Demandas</span>
+      <h3>Do briefing ao post publicado, sem perder nada no caminho.</h3>
+      <p class="sub">Cada peça vira um card com tudo dentro: briefing, arquivos, legenda, comentários e prazo.</p>
+      <ul><li>Colunas que você define (Ideias, Produção, Aprovação, Agendado)</li><li>Demandas recorrentes: o pacote do mês se cria sozinho</li><li>Alerta de prazo e de demanda parada</li></ul>
+      <a class="btn btn-blue" href="#planos">Organizar minhas demandas <span class="arrow">→</span></a>
+    </div>
+    <div class="visual"><div class="kan">
+      <div class="kcol"><h4>Ideias · 3</h4><div class="kc"><span class="pill" style="background:var(--pink)">Carrossel</span><b>Cardápio de verão</b><span style="opacity:.6">Padaria Aurora</span></div><div class="kc"><span class="pill" style="background:var(--sky)">Stories</span><b>Bastidores da obra</b></div></div>
+      <div class="kcol"><h4>Produção · 4</h4><div class="kc"><span class="pill" style="background:var(--salmon)">Atrasado</span><b>Linha fit</b><div class="bar"><i style="width:60%"></i></div></div></div>
+      <div class="kcol"><h4>Aprovação · 2</h4><div class="kc"><span class="pill" style="background:var(--butter)">Aguardando</span><b>Black Friday</b><div class="bar"><i style="width:90%"></i></div></div><div class="kc"><span class="pill" style="background:var(--mint)">Aprovado</span><b>Depoimento</b></div></div>
+    </div></div>
+  </div>
+  <div class="feat">
+    <div>
+      <span class="eyebrow">Aprovação</span>
+      <h3>O cliente aprova em um toque. Você para de correr atrás.</h3>
+      <p class="sub">Mande um link. Ele vê a arte como vai ficar no feed, comenta direto na peça e aprova. Sem baixar app, sem criar senha.</p>
+      <ul><li>Histórico de cada versão e de quem aprovou</li><li>Lembrete automático pra quem esqueceu</li><li>Aprovou? Já vai pro calendário</li></ul>
+      <a class="btn btn-blue" href="#planos">Acelerar aprovações <span class="arrow">→</span></a>
+    </div>
+    <div class="visual"><div class="post">
+      <div class="thumb"></div>
+      <div style="display:grid;gap:10px;min-width:0">
+        <b style="font-family:var(--display);font-size:18px">Black Friday · peça 1</b>
+        <div class="comment"><b>Ana (cliente):</b> Amei! Só troca "imperdível" por "só hoje"?</div>
+        <div class="comment"><b>Você:</b> Feito, versão 2 no ar ✓</div>
+        <div class="approve"><span style="background:var(--mint);color:#0F1E36">Aprovar</span><span style="background:var(--bg);border:1px solid var(--line)">Pedir ajuste</span></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="feat">
+    <div>
+      <span class="eyebrow">Agendamento</span>
+      <h3>O mês inteiro planejado. E postado na hora certa.</h3>
+      <p class="sub">Arraste os posts no calendário de cada cliente. Na hora marcada, o Pauta publica no Instagram e no Facebook.</p>
+      <ul><li>Feed, carrossel, Reels e Stories</li><li>Visão por cliente ou da agência inteira</li><li>Datas comemorativas já marcadas no calendário</li></ul>
+      <a class="btn btn-blue" href="#planos">Planejar meu mês <span class="arrow">→</span></a>
+    </div>
+    <div class="visual">
+      <div style="display:flex;justify-content:space-between;margin-bottom:12px"><b style="font-family:var(--display)">Novembro</b><span class="pill" style="background:var(--sky)">12 agendados</span></div>
+      <div class="cal">
+        <div>3<i style="background:var(--pink)"></i></div><div>4</div><div>5<i style="background:var(--sky)"></i></div><div>6</div><div>7<i style="background:var(--mint)"></i></div><div>8</div><div>9</div>
+        <div>10<i style="background:var(--sky)"></i></div><div>11</div><div>12<i style="background:var(--pink)"></i></div><div>13</div><div>14<i style="background:var(--butter)"></i></div><div>15</div><div>16</div>
+        <div>17<i style="background:var(--mint)"></i></div><div>18</div><div>19<i style="background:var(--sky)"></i></div><div>20</div><div style="outline:2px solid var(--blue)">21<i style="background:var(--salmon)"></i></div><div>22<i style="background:var(--pink)"></i></div><div>23</div>
+        <div>24</div><div>25<i style="background:var(--sky)"></i></div><div>26</div><div>27<i style="background:var(--mint)"></i></div><div>28<i style="background:var(--butter)"></i></div><div>29</div><div>30</div>
+      </div>
+    </div>
+  </div>
+  <div class="feat">
+    <div>
+      <span class="eyebrow">Automação de DMs</span>
+      <h3>Comentou "QUERO", recebeu na DM. Venda no automático.</h3>
+      <p class="sub">Crie regras por palavra-chave e o Pauta responde comentários e mensagens dos seus clientes, 24 horas por dia.</p>
+      <ul><li>Resposta no comentário e na DM ao mesmo tempo</li><li>Envio de link, cupom, catálogo ou formulário</li><li>Leads capturados vão direto pro Comercial</li></ul>
+      <a class="btn btn-blue" href="#planos">Automatizar meus clientes <span class="arrow">→</span></a>
+    </div>
+    <div class="visual"><div class="dm">
+      <div class="rule">SE comentário contém "QUERO" → enviar DM "Cardápio"</div>
+      <div class="in-msg">QUERO 😍</div>
+      <div class="out">Oi, Carla! Aqui está o cardápio de verão 👉 link.pauta/aurora</div>
+      <div class="in-msg">Vocês entregam no Centro?</div>
+      <div class="out">Entregamos sim! Quer falar com a equipe agora?</div>
+    </div></div>
+  </div>
+  <div class="feat">
+    <div>
+      <span class="eyebrow">Financeiro e contratos</span>
+      <h3>Saiba quanto cada cliente realmente te dá de lucro.</h3>
+      <p class="sub">Mensalidade, horas da equipe e despesas lado a lado. E o sistema avisa antes de um contrato vencer.</p>
+      <ul><li>Contas a receber com lembrete pro cliente</li><li>Rentabilidade por cliente</li><li>Contratos com vigência e reajuste</li></ul>
+      <a class="btn btn-blue" href="#planos">Controlar meu caixa <span class="arrow">→</span></a>
+    </div>
+    <div class="visual"><div class="fin">
+      <span class="eyebrow">Recebido em novembro</span>
+      <div class="big">R$ 18.750</div>
+      <div class="r"><span>Padaria Aurora</span><span class="pill" style="background:var(--mint)">Pago · R$ 2.400</span></div>
+      <div class="r"><span>Casa Lume</span><span class="pill" style="background:var(--butter)">Vence dia 20 · R$ 3.100</span></div>
+      <div class="r"><span>Studio Ventura</span><span class="pill" style="background:var(--salmon)">Atrasado · R$ 1.800</span></div>
+    </div></div>
+  </div>
+</section>
+
+<section class="band navy" id="como"><div class="in">
+  <span class="eyebrow">Como funciona</span>
+  <h2 class="h2" style="margin-top:14px;max-width:16ch">Assinou hoje, sua agência roda amanhã.</h2>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3>Escolha o plano</h3><p>Assine com Pix ou cartão. Sua agência é criada na hora.</p></div>
+    <div class="step"><span class="n">2</span><h3>Cadastre clientes e equipe</h3><p>Importe seus clientes, convide o time e conecte os Instagrams.</p></div>
+    <div class="step"><span class="n">3</span><h3>Trabalhe numa pauta só</h3><p>Demandas, aprovações e posts saem do mesmo lugar, todo dia.</p></div>
+  </div>
+  <div class="ctas" style="margin-top:48px"><a class="btn btn-paper" href="#planos">Começar agora <span class="arrow">→</span></a></div>
+</div></section>
+
+<section class="band"><div class="in">
+  <span class="eyebrow">E tem mais</span>
+  <h2 class="h2" style="margin-top:14px;max-width:18ch">Os detalhes que fazem sua agência parecer gigante.</h2>
+  <div class="extras">
+    <div><h3>Portal do cliente</h3><p>Uma área com a sua marca onde o cliente vê o calendário, aprova peças e baixa relatórios.</p></div>
+    <div><h3>Banco de mídia</h3><p>Logos, fotos e vídeos de cada cliente organizados e prontos pra usar.</p></div>
+    <div><h3>Legenda com IA</h3><p>Gere ideias de legenda e hashtags no tom de voz de cada marca.</p></div>
+    <div><h3>Briefing online</h3><p>Formulário com sua marca que vira lead e demanda automaticamente.</p></div>
+    <div><h3>Avisos no WhatsApp</h3><p>Prazos, aprovações e cobranças avisados onde a equipe e o cliente estão.</p></div>
+    <div><h3>Link na bio</h3><p>Página de links para cada cliente, com cliques medidos.</p></div>
+    <div><h3>Controle de horas</h3><p>Quanto tempo cada demanda levou e quem fez.</p></div>
+    <div><h3>Modelos de pacote</h3><p>"8 posts + 4 Reels" vira demandas do mês com um clique.</p></div>
+    <div><h3>App no celular</h3><p>Instala direto do navegador, funciona como aplicativo.</p></div>
+  </div>
+</div></section>
+
+<section class="band" style="padding-top:0"><div class="in">
+  <span class="eyebrow">Antes e depois</span>
+  <h2 class="h2" style="margin-top:14px">Sua semana, com e sem o Pauta.</h2>
+  <div class="cmp">
+    <div class="before"><h3 style="font-size:24px">Sem</h3><ul><li>Segunda inteira montando planilha</li><li>Cliente sumido com a arte pra aprovar</li><li>Post que esqueceu de agendar</li><li>Cobrança feita no susto</li><li>Equipe perguntando o que fazer</li></ul></div>
+    <div class="after"><h3 style="font-size:24px">Com o Pauta</h3><ul><li>Mês criado a partir de um modelo</li><li>Aprovação por link com lembrete automático</li><li>Post publicado sozinho na hora certa</li><li>Cobrança avisada antes do vencimento</li><li>Cada um abre o Meu Dia e sabe o que fazer</li></ul><a class="btn btn-paper" style="justify-self:start;margin-top:8px" href="#planos">Quero o "com" <span class="arrow">→</span></a></div>
+  </div>
+</div></section>
+
+<section class="band" id="planos" style="padding-top:0"><div class="in">
+  <span class="eyebrow">Planos</span>
+  <h2 class="h2" style="margin-top:14px">Escolha e comece hoje.</h2>
+  <p class="sub" style="margin-top:16px">Sem fidelidade. Cancele quando quiser.</p>
+  <div class="plans">
+    <div class="plan"><span class="badge">Em teste</span><h3>Solo</h3><p style="opacity:.7;font-size:15px">Para social media que atende sozinho.</p><div class="price">R$ 97<small>/mês</small></div>
+      <ul><li>1 usuário</li><li>Até 5 clientes</li><li>Demandas e aprovação</li><li>Agendamento de posts</li><li>Financeiro básico</li></ul>
+      <a class="btn btn-navy" href="#planos">Assinar Solo</a></div>
+    <div class="plan hot"><span class="badge">Em teste · mais escolhido</span><h3>Agência</h3><p style="opacity:.7;font-size:15px">Para equipes que querem crescer.</p><div class="price">R$ 197<small>/mês</small></div>
+      <ul><li>Até 5 usuários</li><li>Até 20 clientes</li><li>Tudo do Solo</li><li>Automação de DMs</li><li>Portal do cliente e relatórios</li><li>Contratos e rentabilidade</li></ul>
+      <a class="btn btn-blue" href="#planos">Assinar Agência <span class="arrow">→</span></a></div>
+    <div class="plan"><span class="badge">Em teste</span><h3>Estúdio</h3><p style="opacity:.7;font-size:15px">Para operações maiores.</p><div class="price">R$ 397<small>/mês</small></div>
+      <ul><li>Usuários ilimitados</li><li>Clientes ilimitados</li><li>Tudo do Agência</li><li>Portal com seu domínio</li><li>Suporte prioritário</li></ul>
+      <a class="btn btn-navy" href="#planos">Assinar Estúdio</a></div>
+  </div>
+  <div class="beta"><b>Planos em fase de teste.</b><span>Valores e recursos podem mudar até o lançamento oficial. Quem assinar agora mantém o preço.</span></div>
+</div></section>
+
+<section class="band" id="duvidas" style="padding-top:0"><div class="in">
+  <span class="eyebrow">Dúvidas</span>
+  <h2 class="h2" style="margin-top:14px">Perguntas frequentes</h2>
+  <div class="faq">
+    <details><summary>Tem teste grátis?</summary><p>Não. Você pode conhecer tudo por esta página e, quando decidir, assina e começa na hora. Sem fidelidade: se não gostar, cancela.</p></details>
+    <details><summary>Preciso de cartão de crédito?</summary><p>Não. Você pode pagar com Pix ou cartão.</p></details>
+    <details><summary>Meus clientes precisam criar conta?</summary><p>Não. Eles aprovam por link. Se quiser, pode dar acesso ao portal do cliente.</p></details>
+    <details><summary>Publica sozinho no Instagram?</summary><p>Sim, em contas profissionais do Instagram ligadas a uma página do Facebook. Você conecta uma vez e pronto.</p></details>
+    <details><summary>Funciona no celular?</summary><p>Sim. O Pauta funciona no navegador do celular e pode ser instalado como aplicativo.</p></details>
+    <details><summary>Posso mudar de plano depois?</summary><p>Pode subir ou descer de plano quando quiser, direto no sistema.</p></details>
+  </div>
+</div></section>
+
+<section class="band final"><div class="in">
+  <h2>Sua agência merece mais que uma planilha.</h2>
+  <p class="sub">Assine hoje e tenha demandas, aprovações, posts e financeiro rodando no mesmo lugar.</p>
+  <div class="ctas"><a class="btn btn-paper" href="#planos">Escolher meu plano <span class="arrow">→</span></a><a class="btn btn-line" href="#recursos">Ver recursos de novo</a></div>
+</div></section>
+
+<footer><div class="in"><a class="logo" href="#topo" style="font-size:20px"><i></i>pauta</a><span>Termos de uso · Política de privacidade</span></div></footer>
+
+<div class="mcta"><a class="btn btn-blue" href="#planos">Assinar agora <span class="arrow">→</span></a></div>
